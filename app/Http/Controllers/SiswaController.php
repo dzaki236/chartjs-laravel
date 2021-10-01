@@ -59,6 +59,7 @@ class SiswaController extends Controller
     public function show(Siswa $siswa)
     {
         //
+        return view('crud.show',compact('siswa'));
     }
 
     /**
@@ -67,9 +68,10 @@ class SiswaController extends Controller
      * @param  \App\Models\Siswa  $siswa
      * @return \Illuminate\Http\Response
      */
-    public function edit(Siswa $siswa)
+    public function edit($id)
     {
         //
+        return view('crud.edit',['siswa'=>Siswa::findOrFail($id)]);
     }
 
     /**
@@ -79,9 +81,19 @@ class SiswaController extends Controller
      * @param  \App\Models\Siswa  $siswa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Siswa $siswa)
+    public function update(Request $request, $id)
     {
         //
+        $this->validate($request,['*'=>'required'],['required'=>':attribute tidak boleh kosong']);
+        $data = Siswa::find($id);
+        $data->update($request->all());
+        if ($data) {
+            # code...
+            return redirect()->route('siswa.index')->with(['success'=>'Action Success']);
+        }else{
+            return redirect()->route('siswa.index')->with(['error'=>'Action Failed']);
+
+        }
     }
 
     /**

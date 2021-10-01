@@ -29,60 +29,60 @@
         @endif
         
         <hr>
-        <h2>Tambah Data Siswa</h2>
+        <h2>Detail Data Siswa</h2>
         <br>
         <div class="row">
             <div class="col-3"> <a href="{{ route('siswa.index') }}" class="btn btn-outline-dark w-100">Kembali</a>
             </div>
         </div>
         <br>
-        <form action="{{ route('siswa.store') }}" method="POST" autocomplete="off">
-            @csrf
+        <div>
             <p>Nama Lengkap : </p>
             <div class="form-outline mb-5">
-                <input type="text" id="form1Example1" name="nama_lengkap" class="form-control" placeholder="Ex.Dzaki"
-                    value="{{ old('nama_lengkap', '') }}" />
+                <input type="text" id="form1Example1" readonly disabled name="nama_lengkap" class="form-control" placeholder="Ex.Dzaki"
+                    value="{{ old('nama_lengkap', $siswa->nama_lengkap) }}" />
                 <label class="form-label" for="form1Example1">Nama Lengkap</label>
             </div>
             <p>Kelas : </p>
             <div class="form-outline mb-5">
-                <input type="text" name="kelas" id="form1Example2" class="form-control" placeholder="Ex.12 Rpl 2"
-                    value="{{ old('kelas', '') }}" />
+                <input type="text" name="kelas" readonly disabled id="form1Example2" class="form-control" placeholder="Ex.12 Rpl 2"
+                    value="{{ old('kelas', $siswa->kelas) }}" />
                 <label class="form-label" for="form1Example2">Kelas</label>
             </div>
             <p>Alamat : </p>
             <div class="form-outline mb-4">
-                <textarea class="form-control" id="form4Example3" rows="4"
-                    name="alamat">{{ old('alamat', '') }}</textarea>
+                <textarea class="form-control" readonly disabled id="form4Example3" rows="4"
+                    name="alamat">{{ old('alamat', $siswa->alamat) }}</textarea>
                 <label class="form-label" for="form4Example3">Alamat</label>
             </div>
             <p>Jenis Kelamin : </p>
             <div class="form-outline mb-4">
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input type="radio" class="form-check-input" name="jenis_kelamin" id="" value="l"
-                            >
+                        <input type="radio" readonly disabled class="form-check-input" name="jenis_kelamin" id="" value="l"
+                        {{ ($siswa->jenis_kelamin == "l")?'checked':'' }}>
+                        >
                         Laki-Laki </label>
                 </div>
                 <div class="form-check">
                         <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="jenis_kelamin" id="" value="p"
-                                >
+                            <input type="radio" readonly disabled class="form-check-input" name="jenis_kelamin" id="" value="p"
+                            {{ ($siswa->jenis_kelamin == "p")?'checked':'' }}>
                             Perempuan </label>
                     </div>
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="radio" class="form-check-input" name="jenis_kelamin" id="" value="nothing"
+                            <input type="radio" readonly disabled class="form-check-input" name="jenis_kelamin" id="" value="nothing"
                                 >
                             Tak Ingin Memberi Tahu </label>
                     </div>
             </div>
             <p>Tanggal Lahir : </p>
-            <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir','') }}" class="form-control mb-4" id="">
+            <input type="date" readonly disabled name="tanggal_lahir" value="{{ old('tanggal_lahir',$siswa->tanggal_lahir) }}" class="form-control mb-4" id="">
             <!-- Submit button -->
             <hr>
-            <button type="submit" class="btn btn-primary btn-block">Tambah data</button>
-        </form>
+            {{-- <button type="submit" class="btn btn-primary btn-block">Ubah data</button> --}}
+</div>
     </div>
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>

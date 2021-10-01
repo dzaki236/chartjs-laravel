@@ -29,31 +29,32 @@
         @endif
         
         <hr>
-        <h2>Tambah Data Siswa</h2>
+        <h2>Ubah Data Siswa</h2>
         <br>
         <div class="row">
             <div class="col-3"> <a href="{{ route('siswa.index') }}" class="btn btn-outline-dark w-100">Kembali</a>
             </div>
         </div>
         <br>
-        <form action="{{ route('siswa.store') }}" method="POST" autocomplete="off">
+        <form action="{{ route('siswa.update',$siswa->id) }}" method="POST" autocomplete="off">
             @csrf
+            @method('PUT')
             <p>Nama Lengkap : </p>
             <div class="form-outline mb-5">
                 <input type="text" id="form1Example1" name="nama_lengkap" class="form-control" placeholder="Ex.Dzaki"
-                    value="{{ old('nama_lengkap', '') }}" />
+                    value="{{ old('nama_lengkap', $siswa->nama_lengkap) }}" />
                 <label class="form-label" for="form1Example1">Nama Lengkap</label>
             </div>
             <p>Kelas : </p>
             <div class="form-outline mb-5">
                 <input type="text" name="kelas" id="form1Example2" class="form-control" placeholder="Ex.12 Rpl 2"
-                    value="{{ old('kelas', '') }}" />
+                    value="{{ old('kelas', $siswa->kelas) }}" />
                 <label class="form-label" for="form1Example2">Kelas</label>
             </div>
             <p>Alamat : </p>
             <div class="form-outline mb-4">
                 <textarea class="form-control" id="form4Example3" rows="4"
-                    name="alamat">{{ old('alamat', '') }}</textarea>
+                    name="alamat">{{ old('alamat', $siswa->alamat) }}</textarea>
                 <label class="form-label" for="form4Example3">Alamat</label>
             </div>
             <p>Jenis Kelamin : </p>
@@ -61,13 +62,14 @@
                 <div class="form-check">
                     <label class="form-check-label">
                         <input type="radio" class="form-check-input" name="jenis_kelamin" id="" value="l"
-                            >
+                        {{ ($siswa->jenis_kelamin == "l")?'checked':'' }}>
+                        >
                         Laki-Laki </label>
                 </div>
                 <div class="form-check">
                         <label class="form-check-label">
                             <input type="radio" class="form-check-input" name="jenis_kelamin" id="" value="p"
-                                >
+                            {{ ($siswa->jenis_kelamin == "p")?'checked':'' }}>
                             Perempuan </label>
                     </div>
                     <div class="form-check">
@@ -78,10 +80,10 @@
                     </div>
             </div>
             <p>Tanggal Lahir : </p>
-            <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir','') }}" class="form-control mb-4" id="">
+            <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir',$siswa->tanggal_lahir) }}" class="form-control mb-4" id="">
             <!-- Submit button -->
             <hr>
-            <button type="submit" class="btn btn-primary btn-block">Tambah data</button>
+            <button type="submit" class="btn btn-primary btn-block">Ubah data</button>
         </form>
     </div>
     <!-- MDB -->

@@ -34,9 +34,9 @@
         <h2>Data Siswa</h2>
         <br>
         <div class="row">
-            <div class="col-2"> <a href="{{ route('siswa.index') }}" class="btn btn-outline-dark">Kembali</a>
+            <div class="col-2"> <a href="/" class="btn btn-outline-dark w-100">Kembali</a>
             </div>
-            <div class="col-10"> <a href="{{ route('siswa.create') }}" class="btn btn-primary">[+] Tambah
+            <div class="col-3"> <a href="{{ route('siswa.create') }}" class="btn btn-primary w-100">[+] Tambah
                     Data</a>
             </div>
         </div>
@@ -62,9 +62,12 @@
                         <td>
                             <form action="{{ route('siswa.destroy', $siswa->id) }}" method="post"
                                 onsubmit="return confirm('Hapus?')" class="form-inline">
+                                <a href="{{ route('siswa.edit',$siswa->id) }}" class="btn btn-warning m-3"><i class="fas fa-pencil-alt    "></i></a>
+                                <a href="{{ route('siswa.show',$siswa->id) }}" class="btn btn-primary m-3"><i class="fas fa-eye    "></i></a>
+
                                 @method('DELETE')
                                 @csrf
-                                <button type="submit">Hapus</button>
+                                <button type="submit" class="btn btn-danger m-3"><i class="fas fa-trash-alt    "></i></button>
                             </form>
                         </td>
                     </tr>
