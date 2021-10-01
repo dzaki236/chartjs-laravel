@@ -15,7 +15,7 @@ class SiswaController extends Controller
     public function index()
     {
         //
-        return view('index',['siswa'=>Siswa::all(),'l'=>Siswa::where('jenis_kelamin','l')->count(),'p'=>Siswa::where('jenis_kelamin','p')->count(),]);
+        return view('crud.index',['siswa'=>Siswa::all(),'l'=>Siswa::where('jenis_kelamin','l')->count(),'p'=>Siswa::where('jenis_kelamin','p')->count(),]);
     }
 
     /**
@@ -26,6 +26,7 @@ class SiswaController extends Controller
     public function create()
     {
         //
+        return view('crud.create');
     }
 
     /**
@@ -37,6 +38,16 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request,['*'=>'required'],['required'=>':attribute tidak boleh kosong']);
+        $data = Siswa::create($request->all());
+        if ($data) {
+            # code...
+            return redirect()->route('siswa.index')->with(['success'=>'Action Success']);
+        }else{
+            return redirect()->route('siswa.index')->with(['error'=>'Action Failed']);
+
+        }
+        
     }
 
     /**
@@ -79,8 +90,17 @@ class SiswaController extends Controller
      * @param  \App\Models\Siswa  $siswa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Siswa $siswa)
+    public function destroy($id)
     {
         //
+        $data = Siswa::findOrFail($id);
+        $datas = $data->delete();
+        if ($datas) {
+            # code...
+            return redirect()->route('siswa.index')->with(['success'=>'Action Success']);
+        }else{
+            return redirect()->route('siswa.index')->with(['error'=>'Action Failed']);
+
+        }
     }
 }

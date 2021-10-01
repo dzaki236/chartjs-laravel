@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\SiswaController;
+use App\Models\Siswa;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home',['siswa'=>Siswa::all(),'l'=>Siswa::where('jenis_kelamin','l')->count(),'p'=>Siswa::where('jenis_kelamin','p')->count(),]);
 });
+Route::resource('/siswa', SiswaController::class);
